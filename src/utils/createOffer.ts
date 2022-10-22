@@ -9,7 +9,7 @@ export const createOffer = async ({
   pc: RTCPeerConnection;
   ws: Socket;
   receiverId: string;
-  category: string;
+  category: "camera" | "monitor";
 }) => {
   const offer = await pc.createOffer();
   await pc.setLocalDescription(offer);
