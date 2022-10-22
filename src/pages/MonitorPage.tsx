@@ -7,7 +7,7 @@ export const MonitorPage = () => {
 
   const pc = useStore((store) => store.pcMonitor);
   const receiverId = useStore((store) => store.receiverId);
-  const ws = useStore((store) => store.socketMonitor);
+  const ws = useStore((store) => store.socket);
 
   useEffect(() => {
     setup();

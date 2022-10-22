@@ -19,7 +19,7 @@ export const StreamPage = () => {
 
   const pc = useStore((store) => store.pcStream);
   const receiverId = useStore((store) => store.receiverId);
-  const ws = useStore((store) => store.socketStream);
+  const ws = useStore((store) => store.socket);
 
   useEffect(() => {
     setup();

@@ -10,17 +10,11 @@ import { useStore } from "./store/useStore";
 
 function App() {
   const setReceiver = useStore((state) => state.setReceiver);
-  const wsStream = useStore((store) => store.socketStream);
-  const wsMonitor = useStore((store) => store.socketMonitor);
+  const wsStream = useStore((store) => store.socket);
 
-  useOnSocketConnect(wsStream, ({ server }) => {
-    console.log({ server });
-    setReceiver(server);
-  });
-
-  useOnSocketConnect(wsMonitor, ({ server }) => {
-    console.log({ server });
-    setReceiver(server);
+  useOnSocketConnect(wsStream, (response) => {
+    console.log(response);
+    setReceiver(response.server);
   });
 
   return (
