@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useStore } from "../store/useStore";
-import { createOffer } from "../utils/createOffer";
+import { sendOffer } from "../utils/sendOffer";
 
 const width = 640;
 const height = 448;
@@ -43,7 +43,7 @@ export const StreamPage = () => {
   const setup = async () => {
     await addStreamToPC();
 
-    await createOffer({
+    await sendOffer({
       pc: pc.current,
       ws,
       receiverId,
