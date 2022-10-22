@@ -7,13 +7,16 @@ export interface SocketSlice {
   setReceiver: (receiverId: string) => void;
 }
 
+const WS_HOST = import.meta.env.VITE_WS_HOST || "localhost";
+const WS_PORT = import.meta.env.VITE_WS_PORT || 8080;
+
 export const createSocketSlice: StateCreator<
   SocketSlice,
   [],
   [],
   SocketSlice
 > = (set) => ({
-  socket: io("ws://localhost:8081", {
+  socket: io(`ws://${WS_HOST}:${WS_PORT}`, {
     path: "/ws/socket.io",
     transports: ["websocket", "polling"],
   }),

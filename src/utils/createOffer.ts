@@ -6,19 +6,31 @@ export const createOffer = async ({
   receiverId,
   category,
 }: {
-  pc: RTCPeerConnection;
+  pc: RTCPeerConnection | null;
   ws: Socket;
   receiverId: string;
   category: "camera" | "monitor";
 }) => {
+  if (!pc) {
+    console.log("pc is null");
+    return;
+  }
+
   const offer = await pc.createOffer();
   await pc.setLocalDescription(offer);
 
-  console.log(offer);
+  console.log("offer", offer);
 
-  ws.emit("offer", {
-    target: receiverId,
-    offer: { sdp: offer.sdp, type: offer.type },
-    category,
-  });
+  pc.onicecandidate = (event) => {
+    if (event.candidate !== null) {
+      console.log("new ice");
+    } else {
+      // no more ice candidate
+      ws.emit("offer", {
+        target: receiverId,
+        offer: pc.localDescription,
+        category,
+      });
+    }
+  };
 };

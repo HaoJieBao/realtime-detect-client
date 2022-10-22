@@ -16,12 +16,13 @@ const streamingConstraint: MediaStreamConstraints = {
 export const StreamPage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const localStream = useRef<MediaStream | null>(null);
+  const pc = useRef<RTCPeerConnection | null>(null);
 
-  const pc = useStore((store) => store.pcStream);
   const receiverId = useStore((store) => store.receiverId);
   const ws = useStore((store) => store.socket);
 
   useEffect(() => {
+    pc.current = new RTCPeerConnection();
     setup();
     return () => {
       console.log("cleanup");
@@ -35,16 +36,23 @@ export const StreamPage = () => {
     );
 
     localStream.current.getTracks().forEach((track) => {
-      localStream.current && pc.addTrack(track, localStream.current);
+      localStream.current && pc.current?.addTrack(track, localStream.current);
     });
   };
 
   const setup = async () => {
     await addStreamToPC();
-    await createOffer({ pc, ws, receiverId, category: "camera" });
+
+    await createOffer({
+      pc: pc.current,
+      ws,
+      receiverId,
+      category: "camera",
+    });
 
     ws.on("answer", ({ answer }: { answer: RTCSessionDescriptionInit }) => {
-      pc.setRemoteDescription(answer);
+      console.log("answer", answer);
+      pc.current?.setRemoteDescription(answer);
     });
     if (videoRef.current) videoRef.current.srcObject = localStream.current;
   };
