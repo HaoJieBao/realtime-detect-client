@@ -6,6 +6,6 @@ export const useOnSocketConnect = (
   callback: (response: { server: string }) => void
 ) => {
   useEffect(() => {
-    ws.on("connection", callback);
+    ws.on("receiver", callback);
   }, []);
 };
