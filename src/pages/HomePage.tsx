@@ -41,11 +41,15 @@ export const HomePage = () => {
         </h1>
         <h3 className="text-md">Get Realtime Insight for Helmet Security</h3>
         <div className="w-full flex gap-16">
-          <button className="bg-green-500 px-8 py-2 rounded-full">
-            <Link to="/stream">Open Camera</Link>
+          <button className="bg-green-500 rounded-full py-2">
+            <Link className="px-8 py-2" to="/stream">
+              Open Camera
+            </Link>
           </button>
-          <button className="bg-green-500 px-8 py-2 rounded-full">
-            <Link to="/monitor">Open Monitor</Link>
+          <button className="bg-green-500 rounded-full py-2">
+            <Link className="px-8 py-2" to="/monitor">
+              Open Monitor
+            </Link>
           </button>
         </div>
       </div>
