@@ -8,7 +8,7 @@ export interface SocketSlice {
 }
 
 const WS_HOST =
-  import.meta.env.VITE_WS_HOST || "https://hao-jie-bao.herokuapp.com";
+  import.meta.env.VITE_WS_HOST || "wss://hao-jie-bao.herokuapp.com";
 const WS_PORT = import.meta.env.VITE_WS_PORT || 443;
 
 export const createSocketSlice: StateCreator<
@@ -17,7 +17,7 @@ export const createSocketSlice: StateCreator<
   [],
   SocketSlice
 > = (set) => ({
-  socket: io(`ws://${WS_HOST}:${WS_PORT}`, {
+  socket: io(`${WS_HOST}:${WS_PORT}`, {
     path: "/ws/socket.io",
     transports: ["websocket", "polling"],
   }),
