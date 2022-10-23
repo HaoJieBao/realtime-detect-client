@@ -7,8 +7,9 @@ export interface SocketSlice {
   setReceiver: (receiverId: string) => void;
 }
 
-const WS_HOST = import.meta.env.VITE_WS_HOST || "34.80.43.45";
-const WS_PORT = import.meta.env.VITE_WS_PORT || 80;
+const WS_HOST =
+  import.meta.env.VITE_WS_HOST || "https://hao-jie-bao.herokuapp.com";
+const WS_PORT = import.meta.env.VITE_WS_PORT || 443;
 
 export const createSocketSlice: StateCreator<
   SocketSlice,
