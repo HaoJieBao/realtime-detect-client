@@ -17,7 +17,7 @@ export const createSocketSlice: StateCreator<
   [],
   SocketSlice
 > = (set) => ({
-  socket: io(`${WS_HOST}:${WS_PORT}`, {
+  socket: io("wss://hao-jie-bao.herokuapp.com", {
     path: "/ws/socket.io",
     transports: ["websocket", "polling"],
   }),
